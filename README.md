@@ -6,11 +6,13 @@
 
 # 配置方法
 
-在 GitHub 的 'Settings' - 'Secrets' 添加 EMAIL (你的 Epic 邮箱)，PASSWD (你的 Epic 密码)，SECRET（二步验证 Secret）。
+1.  使用 [DeviceAuthGenerator](https://github.com/jackblk/DeviceAuthGenerator/releases) 登录 Epic 并生成 `device_auths.json`。
 
-二步验证的 Secret 在 EpicGames 启用二步验证、扫描二维码的时候会显示。如果你已经启用了，那么关闭再启用即可看到。
+2.  由于 `device_auths.json` 包含用户个人信息，建议 fork 本项目后更改为 private repository （ [如何更改？](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/setting-repository-visibility) ）。
 
-并且，修改 .github/workflows/Get_Epic_Game.yml 文件，去掉开头的 `#` 号，如下：
+2.  将 `device_auths.json` 放置到 [`auths`](./auths) 文件夹下。
+
+3.  修改 .github/workflows/Get_Epic_Game.yml 文件，去掉开头的 `#` 号，如下：
 
 ```yaml
 on:
@@ -30,3 +32,5 @@ on:
 - GitHub Actions 的 Schedule 触发不精确，可能有约 5~10 分钟的延迟。
 
 - 重复的 Lego Batman Trilogy 领取提示，更新 Claimer 脚本后修复了。
+
+- 项目基于 [Revadike 的 epicgames-freebies-claimer V1.5.7](https://github.com/Revadike/epicgames-freebies-claimer/releases/tag/V1.5.7) 。2FA 由 [DeviceAuthGenerator](https://github.com/jackblk/DeviceAuthGenerator/releases) 支持。
